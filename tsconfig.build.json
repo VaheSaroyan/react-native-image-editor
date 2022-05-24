@@ -1,5 +1,26 @@
-
 {
-  "extends": "./tsconfig",
-  "exclude": ["example"]
+  "compilerOptions": {
+    "sourceMap": true,
+    "target": "es6",
+    "jsx": "react",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "pretty": true,
+    "removeComments": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "lib": ["esnext", "dom"],
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./src/*"]
+    },
+    "types": ["node"]
+  },
+  "include": ["src/**/*",
+    "./declarations.d.ts"
+  ]
 }

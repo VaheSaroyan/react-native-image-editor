@@ -1,31 +1,22 @@
 import * as React from 'react';
 
-import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from '@vahesaroyan/react-native-image-editor';
+import { StyleSheet } from 'react-native';
+import { Editor } from '@vahesaroyan/react-native-image-editor';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
-
-  React.useEffect(() => {
-    multiply(3, 7).then(setResult);
-  }, []);
-
   return (
-    <View style={styles.container}>
-      <Text>Result: {result}</Text>
-    </View>
+    <GestureHandlerRootView style={s.flex1}>
+      <Editor
+        image={
+          'https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=688&q=80'
+        }
+        onPressCreate={(img) => console.log(img)}
+      />
+    </GestureHandlerRootView>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
-  },
+const s = StyleSheet.create({
+  flex1: { flex: 1 },
 });
