@@ -35,13 +35,13 @@
     "ios",
     "android"
   ],
-  "repository": "https://github.com/VaheSaroyan/vahesaroyan-react-native-image-editor",
+  "repository": "https://github.com/VaheSaroyan/react-native-image-editor",
   "author": "Vahe Saroyan <vahe.saroyan.web@gmail.com> (https://github.com/VaheSaroyan)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/VaheSaroyan/vahesaroyan-react-native-image-editor/issues"
+    "url": "https://github.com/VaheSaroyan/react-native-image-editor/issues"
   },
-  "homepage": "https://github.com/VaheSaroyan/vahesaroyan-react-native-image-editor#readme",
+  "homepage": "https://github.com/VaheSaroyan/react-native-image-editor#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
