@@ -143,5 +143,9 @@
     "react-native-gesture-handler": "^2.15.0",
     "react-native-reanimated": "^3.8.1"
   },
-  "packageManager": "yarn@3.2.1"
+  "packageManager": "yarn@3.6.1",
+  "volta": {
+    "node": "20.11.1",
+    "yarn": "3.6.1"
+  }
 }
