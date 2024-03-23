@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+import { type StyleProp, StyleSheet, View, type ViewStyle } from 'react-native';
 import { colors } from '../../../assets/colors';
 import { AppText, Button } from '../../atoms';
 import { icons } from '../../../assets/icons';

@@ -1,11 +1,11 @@
-import React, { FC } from 'react';
+import React, { type FC } from 'react';
 import {
-  ImageProps,
-  StyleProp,
+  type ImageProps,
+  type StyleProp,
   StyleSheet,
   TouchableOpacity,
-  TouchableOpacityProps,
-  ViewStyle,
+  type TouchableOpacityProps,
+  type ViewStyle,
 } from 'react-native';
 import { colors } from '../../../assets/colors';
 import { AppText, Icon } from '../index';

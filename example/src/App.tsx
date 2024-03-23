@@ -8,9 +8,10 @@ export default function App() {
   return (
     <GestureHandlerRootView style={s.flex1}>
       <Editor
-        image={
-          'https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=688&q=80'
-        }
+        images={[
+          'https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=688&q=80',
+        ]}
+        initialSettingsForBackend={null}
         onPressCreate={(img) => console.log(img)}
       />
     </GestureHandlerRootView>

@@ -1,12 +1,12 @@
 import React from 'react';
 import {
   Image,
-  ImageProps,
-  ImageStyle,
-  StyleProp,
+  type ImageProps,
+  type ImageStyle,
+  type StyleProp,
   StyleSheet,
   View,
-  ViewStyle,
+  type ViewStyle,
 } from 'react-native';
 import { BTN_ICON_HEIGHT } from '../../../utils/constants';
 interface Props {

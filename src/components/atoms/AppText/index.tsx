@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, TextProps } from 'react-native';
+import { Text, type TextProps } from 'react-native';
 
 interface Props extends TextProps {}
 export const AppText: React.FC<Props> = ({ children, ...textProps }) => {

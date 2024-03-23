@@ -1,41 +1,56 @@
-import React, { useState, FC } from 'react';
+import React, { type FC } from 'react';
 import {
-  ImageProps,
-  StyleProp,
+  type ImageProps,
+  type StyleProp,
+  type ViewStyle,
   StyleSheet,
   View,
-  ViewStyle,
 } from 'react-native';
 import { colors } from '../../../assets/colors';
 import { Button } from '../../atoms';
-import { BTN_BORDER_RADIUS } from '../../../utils/constants';
+import {
+  BTN_BORDER_RADIUS,
+  HEIGHT,
+  IS_IPAD,
+  WIDTH,
+} from '../../../utils/constants';
 import { icons } from '../../../assets/icons';
+import { FlipBtnGroup } from '../FlipBtnGroup';
+import {
+  type EditorSettingsType,
+  type SettingsType,
+} from '@vahesaroyan/react-native-image-editor';
 type Props = {
   styleContainer?: StyleProp<ViewStyle>;
+  onPressCrop?: () => void;
   onPressRotate?: () => void;
   onPressRedo?: () => void;
   onPressUndo?: () => void;
   onPressReset?: () => void;
+  onPressFlip?: (flip: boolean, type: 'horizontal' | 'vertical') => void;
   iconCrop?: ImageProps['source'];
   iconPalette?: ImageProps['source'];
   iconRotate?: ImageProps['source'];
   iconRedo?: ImageProps['source'];
   iconUndo?: ImageProps['source'];
   iconReset?: ImageProps['source'];
+  iconFlipVertical?: ImageProps['source'];
+  iconFlipHorizontal?: ImageProps['source'];
   setSelectedBtn: (btnMame: SelectedBtnType) => void;
   selectedBtn: SelectedBtnType;
   counter: number;
-  cropImages: string[];
+  imageSettings: SettingsType[];
+  editorSettings: EditorSettingsType[];
 };
-
-export const enum SelectedBtnType {
+export enum SelectedBtnType {
   CROP = 'Crop',
   PALETTE = 'Palette',
   NONE = '',
 }
-
 export const BtnGroup: FC<Props> = ({
   styleContainer,
+  onPressCrop,
+  onPressFlip,
   onPressRotate,
   onPressRedo,
   onPressUndo,
@@ -46,12 +61,14 @@ export const BtnGroup: FC<Props> = ({
   iconRedo,
   iconUndo,
   iconReset,
+  iconFlipHorizontal,
+  iconFlipVertical,
   setSelectedBtn,
   selectedBtn,
   counter,
-  cropImages,
+  imageSettings,
+  editorSettings,
 }) => {
-  const [rotateBtnDisabled, setRotateBtnDisabled] = useState(false);
   const onPressBtnHandler = (name: SelectedBtnType): void => {
     if (selectedBtn === name) {
       setSelectedBtn(SelectedBtnType.NONE);
@@ -60,46 +77,55 @@ export const BtnGroup: FC<Props> = ({
     }
   };
   return (
-    <View style={[s.container, s.rowWrapper, styleContainer]}>
-      <View style={[s.rowWrapper, s.btnGroupWrapper]}>
+    <View
+      style={[
+        s.container,
+        !IS_IPAD ? s.rowWrapper : s.ipadContainer,
+        styleContainer,
+      ]}
+    >
+      <View style={[!IS_IPAD ? s.rowWrapper : {}, s.btnGroupWrapper]}>
         <Button
           selected={selectedBtn === SelectedBtnType.CROP}
-          onPress={() => onPressBtnHandler(SelectedBtnType.CROP)}
+          onPress={() => {
+            onPressBtnHandler(SelectedBtnType.CROP);
+            onPressCrop && onPressCrop();
+          }}
           btnIcon={iconCrop || icons.crop}
         />
         <Button
           selected={selectedBtn === SelectedBtnType.PALETTE}
-          onPress={() => onPressBtnHandler(SelectedBtnType.PALETTE)}
+          onPress={() => {
+            onPressBtnHandler(SelectedBtnType.PALETTE);
+          }}
           btnIcon={iconPalette || icons.palette}
         />
       </View>
       <Button
-        styleContainer={[
-          selectedBtn !== SelectedBtnType.NONE
-            ? { backgroundColor: colors.transparent }
-            : {},
-          !iconRotate ? { transform: [{ scaleX: -1 }] } : {},
-        ]}
-        disabled={rotateBtnDisabled || selectedBtn !== SelectedBtnType.NONE}
+        styleContainer={[!iconRotate ? { transform: [{ scaleX: -1 }] } : {}]}
         btnIconSize={21}
         onPress={() => {
-          if (selectedBtn === SelectedBtnType.NONE) {
-            onPressRotate && onPressRotate();
-            setRotateBtnDisabled(true);
-            setTimeout(() => {
-              setRotateBtnDisabled(false);
-            }, 500);
-          }
+          onPressRotate && onPressRotate();
         }}
         btnIcon={iconRotate || icons.rotate}
       />
+      <FlipBtnGroup
+        {...{
+          onPressFlip,
+          editorSettings,
+          iconFlipHorizontal,
+          iconFlipVertical,
+        }}
+      />
       <Button
         styleContainer={
-          counter === cropImages.length - 1 || cropImages.length === 0
+          counter === imageSettings?.length - 1 || imageSettings?.length === 0
             ? { backgroundColor: colors.transparent }
             : {}
         }
-        disabled={counter === cropImages.length - 1 || cropImages.length === 0}
+        disabled={
+          counter === imageSettings?.length - 1 || imageSettings?.length === 0
+        }
         btnIconSize={20}
         btnText="Redo"
         onPress={onPressRedo}
@@ -107,11 +133,11 @@ export const BtnGroup: FC<Props> = ({
       />
       <Button
         styleContainer={[
-          counter === 0 || cropImages.length === 0
+          counter === 0 || imageSettings?.length === 0
             ? { backgroundColor: colors.transparent }
             : {},
         ]}
-        disabled={counter === 0 || cropImages.length === 0}
+        disabled={counter === 0 || imageSettings?.length === 0}
         btnIconSize={20}
         btnText="Undo"
         onPress={onPressUndo}
@@ -137,9 +163,17 @@ const s = StyleSheet.create({
     backgroundColor: colors.transparent,
     height: 'auto',
   },
+  ipadContainer: {
+    position: 'absolute',
+    width: 'auto',
+    height: 450,
+    alignItems: 'stretch',
+    justifyContent: 'space-between',
+    top: HEIGHT / 2 - 235,
+    left: WIDTH * 0.035,
+  },
   btnGroupWrapper: {
     backgroundColor: colors.gray,
     borderRadius: BTN_BORDER_RADIUS,
-    // pointerEvents: 'none',
   },
 });

@@ -1,9 +1,11 @@
 export const colors = {
+  white: '#fff',
   black: '#000',
+  black_2: '#101010',
+  pink: '#D1335E',
   gray: '#424242',
   gray_dark: '#2B2B2B',
   gray_dark_2: '#38383A',
-  white: '#fff',
   transparent: 'rgba(0,0,0,0)',
   white_01: 'rgba(255,255,255,0.1)',
   white_02: 'rgba(255,255,255,0.2)',
@@ -11,5 +13,5 @@ export const colors = {
   white_05: 'rgba(255,255,255,0.5)',
   black_01: 'rgba(0,0,0,0.1)',
   black_03: 'rgba(0,0,0,0.3)',
-  pink: '#D1335E',
+  black_05: 'rgba(0,0,0,0.5)',
 };

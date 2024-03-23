@@ -10,4 +10,5 @@ export const icons = {
   arrow: require('./arrow.png'),
   cross: require('./cross.png'),
   check: require('./check.png'),
+  flip: require('./flip.png'),
 };
